@@ -1,0 +1,39 @@
+{
+  "name": "prisma-blog",
+  "version": "1.0.0",
+  "description": "blog api",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.js --ext js,graphql --exec babel-node",
+    "postbuild": "./node_modules/babel-cli/bin/babel.js src/ --out-dir src/",
+    "get-schema": "graphql get-schema -p prisma",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix"
+  },
+  "keywords": [
+    "nodejs",
+    "prisma",
+    "graphql"
+  ],
+  "author": "niyant02",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "graphql-cli": "^3.0.14",
+    "graphql-import": "^1.0.2",
+    "graphql-yoga": "^1.18.3",
+    "prettier": "^2.0.5",
+    "prisma-binding": "^2.3.16"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "nodemon": "^2.0.4"
+  }
+}
