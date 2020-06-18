@@ -6,16 +6,14 @@ type Query {
 }
 
 type Mutation {
-  createUser(data: CreateUserInput): User!
-  createPost(data: CreatePostInput): Post!
+  createUser(data: CreateUserInput!): User!
+  createPost(data: CreatePostInput!): Post!
 }
 
 type User {
   id: ID!
   name: String!
   email: String!
-  createdAt: String
-  updatedAt: String
   posts: [Post]
 }
 
@@ -25,8 +23,6 @@ type Post {
   content: String!
   published: Boolean!
   author: User!
-  createdAt: String
-  updatedAt: String
 }
 
 input CreateUserInput {
@@ -38,5 +34,13 @@ input CreatePostInput {
   title: String!
   content: String!
   published: Boolean!
-  author: String!
+  author: ConnectUserInput!
+}
+
+input ConnectUserInput {
+  connect: UserWhereUniqueInput!
+}
+
+input UserWhereUniqueInput {
+  id: ID!
 }

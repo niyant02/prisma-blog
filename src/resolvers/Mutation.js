@@ -1,12 +1,12 @@
 const Mutation = {
     // Create new User
     async createUser(parent, { data }, { prisma }, info) {
-        return prisma.query.createUser(data, info);
+        return prisma.mutation.createUser(data, info);
     },
 
     // Create new Post
     async createPost(parent, { data }, { prisma }, info) {
-        return prisma.query.createPost(data, info);
+        return prisma.mutation.createPost(data, info);
     },
 };
 

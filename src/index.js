@@ -5,10 +5,10 @@ import { importSchema } from 'graphql-import';
 import prisma from './prisma';
 import { resolvers, fragmentReplacements } from './resolvers';
 
-const bodyParser = require('body-parser');
-
 const path = require('path');
 const PATH_TO_ENV = '.env';
+
+const bodyParser = require('body-parser');
 
 require('dotenv').config({
     path: path.resolve(process.cwd(), PATH_TO_ENV),
@@ -16,6 +16,9 @@ require('dotenv').config({
 
 const options = {
     port: 4001,
+    cors: {
+        credentials: true,
+    },
 };
 
 const typeDefs = importSchema('./src/schema.graphql');
@@ -29,6 +32,9 @@ const pubSub = new PubSub();
 
 const server = new GraphQLServer({
     schema,
+    resolverValidationOptions: {
+        requireResolversForResolveType: false,
+    },
     context(request) {
         return {
             pubSub,
@@ -50,6 +56,6 @@ server.express.use((req, res, next) => {
     next();
 });
 
-server.start(options, () => {
-    console.log("The Prorail Server is Up and Running!!! \r\nURL: http://localhost:" + options.port);
+server.start(options, (deets) => {
+    console.log(`Server is now running on port http://localhost:${deets.port}`);
 });
